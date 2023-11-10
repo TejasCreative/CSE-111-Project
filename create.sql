@@ -29,19 +29,18 @@ CREATE TABLE guild (
 CREATE TABLE pets(
     pt_name char(50) not null,
     pt_level decimal(10,0) not null,
-    pt_owner char(100) not null,
+    pt_owner char(100) not null
 );
 
 CREATE TABLE friends (
     f_player char(100) not null,
-    f_friend char(100) not null,
+    f_friend char(100) not null
 );
 
 CREATE TABLE punishments (
-
     pu_player char(100) not null,
     pu_duration decimal(10,0) not null,
-    pu_type char(50) not null,
+    pu_type char(50) not null
     
 
 );
@@ -49,7 +48,7 @@ CREATE TABLE punishments (
 
 CREATE TABLE playergame(
     pl_player char(100) not null,
-    pl_gameUUID char(100) not null,
+    pl_gameUUID char(100) not null
 
 );
 
@@ -61,7 +60,7 @@ CREATE TABLE duels(
     d_kills decimal(10,0) not null,
     d_deaths decimal(10,0) not null,
     d_wins decimal(10,0) not null,
-    d_prestige decimal(10,0) not null,
+    d_prestige decimal(10,0) not null
 );
 
 CREATE TABLE bedwars(
@@ -71,7 +70,7 @@ CREATE TABLE bedwars(
     b_kills decimal(10,0) not null,
     b_deaths decimal(10,0) not null,
     b_wins decimal(10,0) not null,
-    b_prestige decimal(10,0) not null,
+    b_prestige decimal(10,0) not null
 );
 
 CREATE TABLE skywars(
@@ -81,5 +80,5 @@ CREATE TABLE skywars(
     s_kills decimal(10,0) not null,
     s_deaths decimal(10,0) not null,
     s_wins decimal(10,0) not null,
-    s_prestige decimal(10,0) not null,
+    s_prestige decimal(10,0) not null
 );

@@ -1,0 +1,9 @@
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/bedwars.tbl' bedwars
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/duels.tbl' duels
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/friends.tbl' friends
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/playergame.tbl' playergame
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/punishments.tbl' punishments
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/skywars.tbl' skywars
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/pets.tbl' pets
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/guild.tbl' guild
+.import '/Users/tejas/Desktop/CSE-111-Project/data_final/player.tbl' player
