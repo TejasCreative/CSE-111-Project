@@ -136,21 +136,27 @@ u_uuid = player_data["uuid"]
 
 join_date = player_data["firstLogin"]
 
-with open('pdata.txt', 'w') as file:
-    print(data, file=file)
+# with open('pdata.txt', 'w') as file:
+#     print(data, file=file)
 
-file.close()
+# file.close()
 
-data = rq.get(
+# data = rq.get(
 
-    url = "https://api.hypixel.net/player",
-    params = {
-        "key": api_key,
-        "uuid": uuid
-    }
-).json()
+#     url = "https://api.hypixel.net/player",
+#     params = {
+#         "key": api_key,
+#         "uuid": uuid
+#     }
+# ).json()
 
-print(data)
+# print(data)
+
+# GAME DATA
+
+## Duels
+
+
 
 # -------------------
 
