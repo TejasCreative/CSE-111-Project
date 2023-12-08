@@ -10,6 +10,8 @@ import io
 import datetime
 from datetime import datetime as dt
 
+playerCount = 0
+
 # Function to get player data
 db_path = '/Users/tejas/Desktop/CSE-111-Project/data.db'
 base_db_path = '/Users/tejas/Desktop/CSE-111-Project/data.db'
@@ -139,6 +141,9 @@ def check_player(uuid):
 
 #use API to get player data
 def add_player(uuid):
+
+    playerCount = playerCount+1
+
     data = requests.get(
     url = "https://api.hypixel.net/player",
     params={
@@ -158,6 +163,150 @@ def add_player(uuid):
     cursor.execute('INSERT INTO player VALUES (?, ?, ?, ?, ?)', (name, u_uuid, rank, join_date, level))
     commit_close(conn)
 
+def add_duels(uuid):
+    data = requests.get(
+    url = "https://api.hypixel.net/player",
+    params={
+        "key": "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76",
+        "uuid": uuid
+    }
+    ).json()
+
+    player_data = data["player"]
+
+    # DUELS UUID
+
+    duels_uuid = playerCount
+
+    # DUELS DATA
+
+    duels_data = player_data["stats"]["Duels"]
+
+    ### coins
+
+    duels_coins = duels_data["coins"]
+
+    ### level
+
+    duels_level = duels_data["uhc_rookie_title_prestige"] + duels_data["no_debuff_rookie_title_prestige"] + duels_data["tnt_games_rookie_title_prestige"] + duels_data["mega_walls_rookie_title_prestige"] + duels_data["combo_rookie_title_prestige"] + duels_data["classic_rookie_title_prestige"] + duels_data["op_rookie_title_prestige"] + duels_data["sumo_rookie_title_prestige"] + duels_data["all_modes_rookie_title_prestige"] + duels_data["blitz_rookie_title_prestige"] + duels_data["tournament_rookie_title_prestige"] + duels_data["skywars_rookie_title_prestige"] + duels_data["bow_rookie_title_prestige"]
+    
+    ### kills
+
+    duels_kills = duels_data["wins"]
+
+    ### deaths
+
+    duels_deaths = duels_data["deaths"]
+
+    ### games played
+
+    duels_games_played = duels_data["games_played_duels"]
+
+    ### wins
+
+    duels_wins = duels_data["wins"]
+
+
+    ### prestige
+
+    duels_prestige = duels_data["uhc_rookie_title_prestige"] + duels_data["no_debuff_rookie_title_prestige"] + duels_data["tnt_games_rookie_title_prestige"] + duels_data["mega_walls_rookie_title_prestige"] + duels_data["combo_rookie_title_prestige"] + duels_data["classic_rookie_title_prestige"] + duels_data["op_rookie_title_prestige"] + duels_data["sumo_rookie_title_prestige"] + duels_data["all_modes_rookie_title_prestige"] + duels_data["blitz_rookie_title_prestige"] + duels_data["tournament_rookie_title_prestige"] + duels_data["skywars_rookie_title_prestige"] + duels_data["bow_rookie_title_prestige"]
+
+    conn, cursor = connect_to_db(base_db_path)
+    cursor.execute('INSERT INTO duels VALUES (?, ?, ?, ?, ?, ?, ?)', (duels_uuid, duels_coins, duels_deaths, duels_level, duels_kills, duels_deaths, duels_wins, duels_prestige))
+    commit_close(conn)
+
+def add_skywars(uuid):
+
+    data = requests.get(
+    url = "https://api.hypixel.net/v2/player",
+    params={
+        "key": "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76",
+        "uuid": uuid
+    }
+    ).json()
+
+    player_data = data["player"]
+
+    # SKYWARS DATA
+
+    skywars_uuid = playerCount
+
+    skywars_data = player_data["stats"]["SkyWars"]
+
+    ### coins
+
+    skywars_coins = skywars_data["coins"]
+
+    ### level
+
+    skywars_level = skywars_data["skywars_experience"]
+
+    ### kills
+
+    skywars_kills = skywars_data["kills"]
+
+    ### deaths
+
+    skywars_deaths = skywars_data["deaths"]
+
+    ### wins
+
+    skywars_wins = skywars_data["wins"]
+
+    ### prestige
+
+    skywars_prestige = skywars_level/100
+
+    conn, cursor = connect_to_db(base_db_path)
+    cursor.execute('INSERT INTO skywars VALUES (?, ?, ?, ?, ?, ?, ?)', (skywars_uuid, skywars_coins, skywars_level, skywars_kills, skywars_deaths, skywars_wins, skywars_prestige))
+    commit_close(conn)
+
+
+def add_bedwars(uuid):
+    
+        data = requests.get(
+        url = "https://api.hypixel.net/v2/player",
+        params={
+            "key": "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76",
+            "uuid": uuid
+        }
+        ).json()
+    
+        player_data = data["player"]
+    
+        # BEDWARS DATA
+    
+        bedwars_uuid = playerCount
+    
+        bedwars_data = player_data["stats"]["Bedwars"]
+    
+        ### coins
+    
+        bedwars_coins = bedwars_data["coins"]
+    
+        ### level
+    
+        bedwars_level = bedwars_data["Experience"]
+    
+        ### kills
+    
+        bedwars_kills = bedwars_data["kills_bedwars"]
+    
+        ### deaths
+    
+        bedwars_deaths = bedwars_data["deaths_bedwars"]
+    
+        ### wins
+    
+        bedwars_wins = bedwars_data["wins_bedwars"]
+    
+        ### prestige
+    
+        bedwars_prestige = bedwars_level/100
+    
+        conn, cursor = connect_to_db(base_db_path)
+        cursor.execute('INSERT INTO bedwars VALUES (?, ?, ?, ?, ?, ?, ?)', (bedwars_uuid, bedwars_coins, bedwars_level, bedwars_kills, bedwars_deaths, bedwars_wins, bedwars_prestige))
+        commit_close(conn)
     
 
 

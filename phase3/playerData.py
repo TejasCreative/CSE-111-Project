@@ -79,7 +79,7 @@ import json
 # HIDE THIS LATER
 # API Key
 
-api_key = ""
+api_key = "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76"
 
 # String UUID
 
@@ -160,22 +160,80 @@ join_date = player_data["firstLogin"]
 
 ## Duels
 
+# DUELS DATA
+
 duels_data = player_data["stats"]["Duels"]
 
-### coins
+    ### coins
 
 duels_coins = duels_data["coins"]
 
-### kills
-
-# duels_kills = duels_data["kills"]
-
-### deaths
+    ### deaths
 
 duels_deaths = duels_data["deaths"]
 
-### wins
-### losses (?)
+    ### games played
+
+duels_games_played = duels_data["games_played_duels"]
+
+    ### wins
+
+duels_wins = duels_data["wins"]
+
+    ### losses
+
+duels_losses = duels_data["losses"]
+
+    # SKYWARS DATA
+
+skywars_data = player_data["stats"]["SkyWars"]
+
+    ### coins
+
+skywars_coins = skywars_data["coins"]
+
+    ### deaths
+
+skywars_deaths = skywars_data["deaths"]
+
+    ### games played    
+
+skywars_games_played = skywars_data["games_played_skywars"]
+
+    ### wins
+
+skywars_wins = skywars_data["wins"]
+
+    ### losses
+
+skywars_losses = skywars_data["losses"]
+
+    # BEDWARS DATA
+
+bedwars_data = player_data["stats"]["Bedwars"]
+
+    ### coins
+
+bedwars_coins = bedwars_data["coins"]
+
+    ### deaths
+
+bedwars_deaths = bedwars_data["deaths_bedwars"]
+
+    ### games played
+
+bedwars_games_played = bedwars_data["games_played_bedwars"]
+
+    ### wins
+
+bedwars_wins = bedwars_data["wins_bedwars"]
+print(bedwars_wins)
+
+    ### losses
+
+bedwars_losses = bedwars_data["losses_bedwars"]
+print(bedwars_losses)
+
 ### kd
 ### prestige
 
