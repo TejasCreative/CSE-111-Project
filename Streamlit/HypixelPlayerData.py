@@ -7,6 +7,8 @@ import sqlite3
 import csv
 import os
 import io
+import datetime
+from datetime import datetime as dt
 
 # Function to get player data
 db_path = '/Users/tejas/Desktop/CSE-111-Project/data.db'
@@ -120,36 +122,9 @@ def base_init_tables():
     commit_close(conn)
 
 
-
-### BASE Info add to table
-# def add_customer(groupName, quarantineFlag, facility_order, facility, quarantineHours, betweenCustomers):
-#     conn, cursor = connect_to_db(base_db_path)
-    
-#     if quarantineFlag:
-#         quarantineFlag = "True"
-#     else:
-#         quarantineFlag = "False"
-#     cursor.execute('INSERT INTO cards (groupName, quarantineFlag, facility_order, facility, quarantineHours, betweenCustomers) VALUES (?, ?, ?, ?, ?, ?)',
-#     (groupName, quarantineFlag, facility_order, facility, quarantineHours, betweenCustomers))
-    
-#     commit_close(conn)
-
-# def add_employee(firstName, lastName):
-#     conn, cursor = connect_to_db(base_db_path)
-    
-#     cursor.execute('INSERT OR IGNORE INTO employees (firstName, lastName) VALUES (?, ?)',
-#     (firstName, lastName))
-    
-#     commit_close(conn)
-
-# def add_job(grouping, site, subsite, facilityType, estDuration, Address):
-#     conn, cursor = connect_to_db(base_db_path)
-    
-#     cursor.execute('INSERT OR IGNORE INTO jobs (grouping, site, subsite, facilityType, estDuration, Address) VALUES (?, ?, ?, ?, ?, ?)',
-#     (grouping, site, subsite, facilityType, estDuration, Address))
-    
-#     commit_close(conn)
-
+#epoche time to date
+def epoche_to_date(epoche):
+    return dt.fromtimestamp(epoche/1000).strftime('%Y-%m-%d %H:%M:%S')
 
 
 #check if player is in database
@@ -172,7 +147,44 @@ def add_player(uuid):
     }
     ).json()
 
+    player_data = data["player"]
+    name = player_data["displayname"]
+    u_uuid = player_data["uuid"]
+    join_date = epoche_to_date(player_data["firstLogin"])
+    rank = player_data["newPackageRank"]
+    level = player_data["networkExp"]
+
+    conn, cursor = connect_to_db(base_db_path)
+    cursor.execute('INSERT INTO player VALUES (?, ?, ?, ?, ?)', (name, u_uuid, rank, join_date, level))
+    commit_close(conn)
+
     
+
+
+
+
+#read and display player data
+def read_player(uuid):
+    conn, cursor = connect_to_db(base_db_path)
+    cursor.execute('SELECT * FROM player WHERE p_uuid = ?', (uuid,))
+    rows = cursor.fetchall()
+
+
+
+    st.write("Player Name: ", rows[0][0])
+    st.write("Player UUID: ", rows[0][1])
+    st.write("Player Rank: ", rows[0][2])
+    st.write("Player Join Date: ", rows[0][3])
+    st.write("Player Level: ", rows[0][4])
+
+    commit_close(conn)
+
+
+
+
+
+
+
 
 
 #website
@@ -186,16 +198,19 @@ base_init_tables()
 if uuid:
     st.write("Stats for: ", uuid)
     #check if player is in database
-    if check_player(uuid):
-        st.write("Player found in database")
-    else:
+    if (check_player(uuid) == False):
         add_player(uuid)
-
-
-
-
-    
+    read_player(uuid)
     
 
 
 
+    
+
+    
+
+    
+
+    
+
+    
