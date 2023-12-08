@@ -1,14 +1,14 @@
-import requests
+import requests as rq
 import pandas as pd
 import json
 
 # using my api key and my uuid
 
-data = requests.get(
-    url = "https://api.hypixel.net/player",
+data = rq.get(
+    url = "https://api.hypixel.net/v2/player",
     params={
-        "key": "22dcff9c-34e5-4376-a2dc-58c3e4d23ebe",
-        "uuid": "db8936f1e9b7472cb906c69d02f11222"
+        "key": "",
+        "uuid": "9f77085ea2124505940053d790289f58"
     }
 ).json()
 
@@ -17,7 +17,10 @@ data = requests.get(
 
 # example: retrieving skywars coins
 
-skywars_coins = data["player"]["stats"]["SkyWars"]["coins"]
+# skywars_coins = data["player"]["stats"]["SkyWars"]["coins"]
 
-print(skywars_coins)
+# print(skywars_coins)
 
+# games = data["games"]
+
+# print(data)

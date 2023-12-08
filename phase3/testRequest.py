@@ -7,7 +7,7 @@ import json
 data = rq.get(
     url = "https://api.hypixel.net/v2/player",
     params={
-        "key": "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76",
+        "key": "",
         "uuid": "9f77085ea2124505940053d790289f58"
     }
 ).json()
