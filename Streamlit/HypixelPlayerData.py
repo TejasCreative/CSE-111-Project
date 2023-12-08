@@ -213,6 +213,7 @@ def add_duels(uuid):
 
     conn, cursor = connect_to_db(base_db_path)
     cursor.execute('INSERT INTO duels VALUES (?, ?, ?, ?, ?, ?, ?)', (duels_uuid, duels_coins, duels_deaths, duels_level, duels_kills, duels_deaths, duels_wins, duels_prestige))
+    cursor.execute('INSERT INTO playergame VALUES (?, ?)', (uuid, duels_uuid))
     commit_close(conn)
 
 def add_skywars(uuid):
@@ -259,6 +260,7 @@ def add_skywars(uuid):
 
     conn, cursor = connect_to_db(base_db_path)
     cursor.execute('INSERT INTO skywars VALUES (?, ?, ?, ?, ?, ?, ?)', (skywars_uuid, skywars_coins, skywars_level, skywars_kills, skywars_deaths, skywars_wins, skywars_prestige))
+    cursor.execute('INSERT INTO playergame VALUES (?, ?)', (uuid, skywars_uuid))
     commit_close(conn)
 
 
@@ -306,6 +308,7 @@ def add_bedwars(uuid):
     
         conn, cursor = connect_to_db(base_db_path)
         cursor.execute('INSERT INTO bedwars VALUES (?, ?, ?, ?, ?, ?, ?)', (bedwars_uuid, bedwars_coins, bedwars_level, bedwars_kills, bedwars_deaths, bedwars_wins, bedwars_prestige))
+        cursor.execute('INSERT INTO playergame VALUES (?, ?)', (uuid, bedwars_uuid))
         commit_close(conn)
     
 
