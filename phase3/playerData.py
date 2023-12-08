@@ -168,7 +168,7 @@ duels_coins = duels_data["coins"]
 
 ### kills
 
-duels_kills = duels_data["kills"]
+# duels_kills = duels_data["kills"]
 
 ### deaths
 
@@ -178,6 +178,22 @@ duels_deaths = duels_data["deaths"]
 ### losses (?)
 ### kd
 ### prestige
+
+# GUILD
+
+# guild_data = rq.get(
+#     url = "https://api.hypixel.net/v2/guild",
+#     params = {
+#         "key": api_key,
+#         "player": uuid
+#     }
+# ).json()
+
+# with open("gdata.json", "w") as outfile:
+#     json.dump(guild_data, outfile)
+
+
+# print(guild_data)
 
 
 # -------------------

@@ -1,0 +1,169 @@
+{
+    "success": true,
+    "guild": {
+        "_id": "55a5dbfcc8f2a0ad6f261894",
+        "name": "TrollelLOL",
+        "coins": 398380,
+        "coinsEver": 398380,
+        "created": 1436933116467,
+        "members": [
+            {
+                "uuid": "184640268d01424f990c9d131f570963",
+                "rank": "GUILDMASTER",
+                "joined": 1436933116467,
+                "questParticipation": 90,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            },
+            {
+                "uuid": "99be6a39204a4660a384e8b260b50848",
+                "rank": "MEMBER",
+                "joined": 1437005048641,
+                "questParticipation": 928,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            },
+            {
+                "uuid": "db8936f1e9b7472cb906c69d02f11222",
+                "rank": "MEMBER",
+                "joined": 1437147229048,
+                "questParticipation": 97,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            },
+            {
+                "uuid": "30b8426014754f7c925624cd8b46681d",
+                "rank": "MEMBER",
+                "joined": 1437422704645,
+                "questParticipation": 1,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            },
+            {
+                "uuid": "7c366f1b3c4d4c4caada423ce47b45ba",
+                "rank": "MEMBER",
+                "joined": 1437509136589,
+                "questParticipation": 61,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            },
+            {
+                "uuid": "060e0a61e5c84822bb027d6d00903d88",
+                "rank": "MEMBER",
+                "joined": 1437667950407,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            },
+            {
+                "uuid": "1de8c6c9c3c94b9faf69d53f5880b2c6",
+                "rank": "MEMBER",
+                "joined": 1437677373079,
+                "questParticipation": 141,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            },
+            {
+                "uuid": "512987fd4f8b40a9a098c7485f42b7a9",
+                "rank": "MEMBER",
+                "joined": 1440121560202,
+                "questParticipation": 8,
+                "expHistory": {
+                    "2023-12-07": 0,
+                    "2023-12-06": 0,
+                    "2023-12-05": 0,
+                    "2023-12-04": 0,
+                    "2023-12-03": 0,
+                    "2023-12-02": 0,
+                    "2023-12-01": 0
+                }
+            }
+        ],
+        "legacyRanking": 16118,
+        "exp": 7596209,
+        "achievements": {
+            "EXPERIENCE_KINGS": 103201,
+            "WINNERS": 68,
+            "ONLINE_PLAYERS": 2
+        },
+        "name_lower": "trollellol",
+        "guildExpByGameType": {
+            "PAINTBALL": 972,
+            "BUILD_BATTLE": 52941,
+            "SKYWARS": 557569,
+            "WOOL_GAMES": 211,
+            "MCGO": 3330,
+            "GINGERBREAD": 1542,
+            "REPLAY": 0,
+            "HOUSING": 91486,
+            "VAMPIREZ": 9037,
+            "PROTOTYPE": 737280,
+            "ARCADE": 361706,
+            "WALLS": 3624,
+            "UHC": 13938,
+            "WALLS3": 0,
+            "SKYBLOCK": 0,
+            "QUAKECRAFT": 19386,
+            "SURVIVAL_GAMES": 26711,
+            "SPEED_UHC": 0,
+            "ARENA": 0,
+            "DUELS": 179991,
+            "MURDER_MYSTERY": 116447,
+            "BEDWARS": 1737958,
+            "SUPER_SMASH": 81,
+            "PIT": 1610,
+            "SMP": 0,
+            "BATTLEGROUND": 1350,
+            "LEGACY": 0,
+            "TNTGAMES": 98273
+        }
+    }
+}
