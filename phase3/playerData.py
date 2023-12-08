@@ -2,6 +2,7 @@
 
 import requests as rq
 from datetime import datetime, timezone, timedelta
+import json
 
 # Player Data needed
 
@@ -94,6 +95,9 @@ data = rq.get(
     }
 ).json()
 
+with open("data.json", "w") as outfile:
+    json.dump(data, outfile)
+
 # PLAYER DATA
 
 player_data = data["player"]
@@ -156,6 +160,24 @@ join_date = player_data["firstLogin"]
 
 ## Duels
 
+duels_data = player_data["stats"]["Duels"]
+
+### coins
+
+duels_coins = duels_data["coins"]
+
+### kills
+
+duels_kills = duels_data["kills"]
+
+### deaths
+
+duels_deaths = duels_data["deaths"]
+
+### wins
+### losses (?)
+### kd
+### prestige
 
 
 # -------------------
