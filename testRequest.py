@@ -7,8 +7,8 @@ import json
 data = requests.get(
     url = "https://api.hypixel.net/player",
     params={
-        "key": "22dcff9c-34e5-4376-a2dc-58c3e4d23ebe",
-        "uuid": "db8936f1e9b7472cb906c69d02f11222"
+        "key": "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76",
+        "uuid": "7eba395815364e18aac5d6b4d12bbc08"
     }
 ).json()
 
@@ -17,7 +17,11 @@ data = requests.get(
 
 # example: retrieving skywars coins
 
+# skywars_coins = data["player"]["stats"]["SkyWars"]["coins"]
+
+# print(skywars_coins)
+
+print(type(data))
+
 skywars_coins = data["player"]["stats"]["SkyWars"]["coins"]
-
 print(skywars_coins)
-
