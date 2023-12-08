@@ -141,7 +141,7 @@ def check_player(uuid):
 
 #use API to get player data
 def add_player(uuid):
-
+    global playerCount
     playerCount = playerCount+1
 
     data = requests.get(
@@ -162,6 +162,10 @@ def add_player(uuid):
     conn, cursor = connect_to_db(base_db_path)
     cursor.execute('INSERT INTO player VALUES (?, ?, ?, ?, ?)', (name, u_uuid, rank, join_date, level))
     commit_close(conn)
+    add_duels(uuid)
+    add_skywars(uuid)
+    add_bedwars(uuid)
+
 
 def add_duels(uuid):
     data = requests.get(
@@ -188,7 +192,8 @@ def add_duels(uuid):
 
     ### level
 
-    duels_level = duels_data["uhc_rookie_title_prestige"] + duels_data["no_debuff_rookie_title_prestige"] + duels_data["tnt_games_rookie_title_prestige"] + duels_data["mega_walls_rookie_title_prestige"] + duels_data["combo_rookie_title_prestige"] + duels_data["classic_rookie_title_prestige"] + duels_data["op_rookie_title_prestige"] + duels_data["sumo_rookie_title_prestige"] + duels_data["all_modes_rookie_title_prestige"] + duels_data["blitz_rookie_title_prestige"] + duels_data["tournament_rookie_title_prestige"] + duels_data["skywars_rookie_title_prestige"] + duels_data["bow_rookie_title_prestige"]
+    duels_level = duels_data["wins"]
+    duels_level = duels_level/10
     
     ### kills
 
@@ -209,10 +214,11 @@ def add_duels(uuid):
 
     ### prestige
 
-    duels_prestige = duels_data["uhc_rookie_title_prestige"] + duels_data["no_debuff_rookie_title_prestige"] + duels_data["tnt_games_rookie_title_prestige"] + duels_data["mega_walls_rookie_title_prestige"] + duels_data["combo_rookie_title_prestige"] + duels_data["classic_rookie_title_prestige"] + duels_data["op_rookie_title_prestige"] + duels_data["sumo_rookie_title_prestige"] + duels_data["all_modes_rookie_title_prestige"] + duels_data["blitz_rookie_title_prestige"] + duels_data["tournament_rookie_title_prestige"] + duels_data["skywars_rookie_title_prestige"] + duels_data["bow_rookie_title_prestige"]
+    duels_prestige = duels_data["wins"]
+    duels_prestige = duels_prestige/50
 
     conn, cursor = connect_to_db(base_db_path)
-    cursor.execute('INSERT INTO duels VALUES (?, ?, ?, ?, ?, ?, ?)', (duels_uuid, duels_coins, duels_deaths, duels_level, duels_kills, duels_deaths, duels_wins, duels_prestige))
+    cursor.execute('INSERT INTO duels VALUES (?, ?, ?, ?, ?, ?, ?)', (duels_uuid, duels_coins, duels_level, duels_kills, duels_deaths, duels_wins, duels_prestige))
     cursor.execute('INSERT INTO playergame VALUES (?, ?)', (uuid, duels_uuid))
     commit_close(conn)
 
@@ -329,6 +335,48 @@ def read_player(uuid):
     st.write("Player Join Date: ", rows[0][3])
     st.write("Player Level: ", rows[0][4])
 
+    # #get corresponding game data
+    # cursor.execute('SELECT * FROM playergame WHERE pl_player = ?', (uuid,))
+    # rows = cursor.fetchall()
+    # uid = rows[0][1]
+    # st.write("Player Game uid: ", uid)
+
+    cursor.execute('SELECT * FROM duels WHERE d_gameUUID = ? JOIN playergame, (uid,))
+
+
+
+    st.write("SkyWars Stats: ")
+    cursor.execute('SELECT * FROM skywars WHERE s_gameUUID = ?', join , (uid,))
+    rows = cursor.fetchall()
+    st.write("Coins: ", rows[0][1])
+    st.write("Level: ", rows[0][2])
+    st.write("Kills: ", rows[0][3])
+    st.write("Deaths: ", rows[0][4])
+    st.write("Wins: ", rows[0][5])
+
+
+    st.write("Bedwars Stats: ")
+    cursor.execute('SELECT * FROM bedwars WHERE b_gameUUID = ?', (uid,))
+    rows = cursor.fetchall()
+    st.write("Coins: ", rows[0][1])
+    st.write("Level: ", rows[0][2])
+    st.write("Kills: ", rows[0][3])
+    st.write("Deaths: ", rows[0][4])
+    st.write("Wins: ", rows[0][5])
+
+    st.write("Duels Stats: ")
+    cursor.execute('SELECT * FROM duels WHERE d_gameUUID = ?', (uid,))
+    rows = cursor.fetchall()
+    st.write("Coins: ", rows[0][1])
+    st.write("Level: ", rows[0][2])
+    st.write("Kills: ", rows[0][3])
+    st.write("Deaths: ", rows[0][4])
+    st.write("Wins: ", rows[0][5])
+
+    
+
+
+
     commit_close(conn)
 
 
@@ -341,7 +389,7 @@ def read_player(uuid):
 
 #website
 
-st.title("Hypixel Player Data")
+st.title("Hypixel Player Helper")
 st.write("Enter a player's UUID to get their Hypixel stats")
 uuid = st.text_input("UUID")
 
@@ -352,6 +400,7 @@ if uuid:
     #check if player is in database
     if (check_player(uuid) == False):
         add_player(uuid)
+
     read_player(uuid)
     
 
@@ -363,6 +412,3 @@ if uuid:
 
     
 
-    
-
-    

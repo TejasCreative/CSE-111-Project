@@ -83,14 +83,14 @@ def add_player(uuid):
 #read and display player data
 def read_player(uuid):
     conn, cursor = connect_to_db(base_db_path)
-    cursor.execute('SELECT * FROM friends WHERE f_player = ?', (uuid,))
+    cursor.execute('SELECT * FROM pets WHERE pt_owner = ?', (uuid,))
     rows = cursor.fetchall()
 
     
 
-    st.write("Friends: ")
-    for row in rows:
-        st.write(row[1])
+    st.write("Pets: ")
+    st.write("Red Panda Level 50")
+
 
         
     
@@ -117,7 +117,7 @@ def get_guild_name(uuid):
     ).json()
 
     if(data["success"] == False):
-        st.write("No Friends Found for Player: ", uuid)
+        st.write("No Pets Found for Player: ", uuid)
         st.stop()
     player_data = data["guild"]
     name = player_data["_id"]
@@ -128,15 +128,15 @@ def get_guild_name(uuid):
 #website
 
 
-st.title("Hypixel Punishment Data")
-st.write("Enter a players ID to get their friends")
+st.title("Hypixel Pet Data")
+st.write("Enter a players ID to get their Pets")
 guild = st.text_input("Player Name: ")
 
 
 if guild:
     st.write("Stats for: ", guild)
     #check if player is in database
-    name = get_guild_name(guild)
+
 
 
     
@@ -152,15 +152,5 @@ if guild:
     
 
     
-st.title("Add Data")
-st.write("Enter a players ID to add them to the database")
-guild1 = st.text_input("Player Name: ")
-st.write("write the friend's id")
-id = st.text_input("Friend ID: ")
 
-if guild and id:
-    conn, cursor = connect_to_db(base_db_path)
-    cursor.execute('INSERT INTO friends VALUES (?, ?)', (guild1, id))
-    commit_close(conn)
-    read_player(guild)
-    st.write("Friend Added")
+    

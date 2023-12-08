@@ -83,15 +83,15 @@ def add_player(uuid):
 #read and display player data
 def read_player(uuid):
     conn, cursor = connect_to_db(base_db_path)
-    cursor.execute('SELECT * FROM friends WHERE f_player = ?', (uuid,))
+    cursor.execute('SELECT * FROM punishments WHERE pu_player = ?', (uuid,))
     rows = cursor.fetchall()
 
     
 
-    st.write("Friends: ")
+    st.write("Punishments: ")
+    count = 1
     for row in rows:
-        st.write(row[1])
-
+        st.write("Punishment " + str(count) + ": Type: " + str(row[2]) + " Duration: " + str(row[1]))
         
     
 
@@ -117,7 +117,7 @@ def get_guild_name(uuid):
     ).json()
 
     if(data["success"] == False):
-        st.write("No Friends Found for Player: ", uuid)
+        st.write("No Punishments Found for Player: ", uuid)
         st.stop()
     player_data = data["guild"]
     name = player_data["_id"]
@@ -129,7 +129,7 @@ def get_guild_name(uuid):
 
 
 st.title("Hypixel Punishment Data")
-st.write("Enter a players ID to get their friends")
+st.write("Enter a players ID to get their punishment history")
 guild = st.text_input("Player Name: ")
 
 
@@ -151,16 +151,20 @@ if guild:
 
     
 
-    
-st.title("Add Data")
-st.write("Enter a players ID to add them to the database")
-guild1 = st.text_input("Player Name: ")
-st.write("write the friend's id")
-id = st.text_input("Friend ID: ")
+st.Title("Add Data")
+st.write("Enter a players ID to add their punishment history to the database")
+guild = st.text_input("Player Name: ")
 
-if guild and id:
+st.write("Enter the punishment type")
+punishment = st.text_input("Punishment Type: ")
+
+st.write("Enter the punishment duration")
+
+duration = st.text_input("Punishment Duration: ")
+
+if guild and punishment and duration:
     conn, cursor = connect_to_db(base_db_path)
-    cursor.execute('INSERT INTO friends VALUES (?, ?)', (guild1, id))
+    cursor.execute('INSERT INTO punishments VALUES (?, ?, ?)', (guild, punishment, duration))
     commit_close(conn)
-    read_player(guild)
-    st.write("Friend Added")
+    st.write("Punishment Added")
+    

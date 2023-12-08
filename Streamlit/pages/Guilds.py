@@ -33,7 +33,7 @@ def epoche_to_date(epoche):
 #check if player is in database
 def check_player(uuid):
     conn, cursor = connect_to_db(base_db_path)
-    cursor.execute('SELECT * FROM player WHERE p_uuid = ?', (uuid,))
+    cursor.execute('SELECT * FROM guild WHERE g_uuid = ?', (uuid,))
     rows = cursor.fetchall()
     if len(rows) == 0:
         return False
@@ -45,12 +45,37 @@ def add_player(uuid):
     data = requests.get(
     url = "https://api.hypixel.net/v2/guild",
     params={
-        "name": uuid
+        "key": "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76",
+        "player": uuid
     }
     ).json()
-    st.write(data)
 
-    
+    if(data["success"] == False):
+        st.write("Player not in guild")
+        st.stop()
+    player_data = data["guild"]
+    name = player_data["name"]
+    id = player_data["_id"]
+    tag = player_data["tag"]
+    created = epoche_to_date(player_data["created"])
+    level = player_data["exp"]
+    members = ""
+    for i in range(len(player_data["members"])):
+        members += player_data["members"][i]["uuid"] + ","
+        if(i>50):
+            break
+        
+
+
+
+
+        
+
+    conn, cursor = connect_to_db(base_db_path)
+    cursor.execute('INSERT INTO guild VALUES (?, ?, ?, ?, ?, ?)', (name, id, members, level, created, tag))
+    commit_close(conn)
+
+
 
 
 
@@ -58,16 +83,22 @@ def add_player(uuid):
 #read and display player data
 def read_player(uuid):
     conn, cursor = connect_to_db(base_db_path)
-    cursor.execute('SELECT * FROM player WHERE p_uuid = ?', (uuid,))
+    cursor.execute('SELECT * FROM guild WHERE g_uuid = ?', (uuid,))
     rows = cursor.fetchall()
 
+    
+
+    st.write("Guild Name: ", rows[0][0])
+    st.write("Guild ID: ", rows[0][1])
+    st.write("Guild Members: ", rows[0][2])
+    st.write("Guild Level: ", rows[0][3])
+    st.write("Guild Created: ", rows[0][4])
+    st.write("Guild Tag: ", rows[0][5])
+    
 
 
-    st.write("Player Name: ", rows[0][0])
-    st.write("Player UUID: ", rows[0][1])
-    st.write("Player Rank: ", rows[0][2])
-    st.write("Player Join Date: ", rows[0][3])
-    st.write("Player Level: ", rows[0][4])
+
+    
 
     commit_close(conn)
 
@@ -76,22 +107,42 @@ def read_player(uuid):
 
 
 
+#def get guild name from API
+def get_guild_name(uuid):
+    data = requests.get(
+    url = "https://api.hypixel.net/v2/guild",
+    params={
+        "key": "5d69e9f7-5f3c-4e4b-b065-9e2a61e83c76",
+        "player": uuid
+    }
+    ).json()
+
+    if(data["success"] == False):
+        st.write("Player not in guild")
+        st.stop()
+    player_data = data["guild"]
+    name = player_data["_id"]
+    return name
 
 
 
 #website
 
+
 st.title("Hypixel Guild Data")
-st.write("Enter a guild name to get stats for that guild")
-guild = st.text_input("Guild Name: ")
+st.write("Enter a players ID to get the guild data for that guild")
+guild = st.text_input("Player Name: ")
 
 
 if guild:
     st.write("Stats for: ", guild)
     #check if player is in database
-    if (check_player(guild) == False):
-        add_player(guild)
-    read_player(guild)
+    name = get_guild_name(guild)
+    
+    if (check_player(name) == False):
+        add_player(name)
+    
+    read_player(name)
     
 
 
